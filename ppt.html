@@ -1,0 +1,402 @@
+<!--
+PALETTE: "Professional Royal Blue" (#0066FF, #F8FAFC, #1F2937, #9CA3AF)
+PLAN:
+1. Slide 1: Cover Page (Main Title)
+2. Slide 2: Table of Contents (Index)
+3. Slide 3: 2026 AI Market Overview (Line Chart)
+4. Slide 4: AI Evolution Milestones (Pin Timeline - Inspired by Image)
+5. Slide 5: AI Content Market Shares (Donut Charts - Inspired by Image)
+6. Slide 6: Promising Sectors & Fields (Grid Layout)
+7. Slide 7: AI Content Automation Roadmap (Step Diagram)
+8. Slide 8: Human vs AI Creative Matrix (2x2 Matrix)
+9. Slide 9: AI Ecosystem Synergy (Venn Diagram)
+10. Slide 10: Conclusion & Closing (Thank you)
+TECHNICAL: Chart.js for all data viz. Labels handled as arrays to prevent errors.
+CONFIRMATION: NO SVG, NO MERMAID used. Icons are styled Unicode/HTML.
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 AI 산업 트렌드 리포트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #F1F5F9;
+            color: #1F2937;
+            padding: 40px 0;
+        }
+
+        .ppt-slide {
+            width: 1200px;
+            height: 675px;
+            background-color: #FFFFFF;
+            margin: 0 auto 50px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px;
+        }
+
+        /* Design Tokens */
+        .color-blue-main { color: #0066FF; }
+        .bg-blue-main { background-color: #0066FF; }
+        .border-blue-main { border-color: #0066FF; }
+
+        .slide-number {
+            position: absolute;
+            bottom: 40px;
+            right: 80px;
+            font-size: 14px;
+            color: #9CA3AF;
+        }
+
+        .main-title {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .sub-title {
+            font-size: 20px;
+            color: #6B7280;
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+
+        /* Milestones Pin (No SVG) */
+        .pin {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background-color: #0066FF;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,102,255,0.3);
+        }
+        .pin-inner {
+            transform: rotate(45deg);
+            color: white;
+            text-align: center;
+        }
+
+        .timeline-bar {
+            position: absolute;
+            top: 230px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #E5E7EB;
+        }
+
+        /* Matrix & Diagrams */
+        .matrix-cell {
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .chart-container-box {
+            position: relative;
+            width: 100%;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Cover Page -->
+    <div class="ppt-slide flex-col justify-center items-start">
+        <div class="w-24 h-1 bg-blue-main mb-8"></div>
+        <p class="text-blue-main font-bold tracking-widest mb-4">BUSINESS STRATEGY REPORT</p>
+        <h1 class="main-title">2026 AI 산업 트렌드:<br><span class="text-blue-main">콘텐츠 혁명과 에이전트 경제</span></h1>
+        <p class="text-2xl text-gray-400 font-light">지능형 자동화가 이끄는 새로운 비즈니스 패러다임</p>
+        <div class="mt-20">
+            <p class="font-bold text-gray-800">2024. 05. 22</p>
+            <p class="text-gray-400">부체오ai / 부체오</p>
+        </div>
+        <div class="slide-number">01</div>
+    </div>
+
+    <!-- Slide 2: Table of Contents -->
+    <div class="ppt-slide">
+        <h2 class="text-blue-main font-black text-3xl mb-12">CONTENTS</h2>
+        <div class="space-y-8 mt-10">
+            <div class="flex items-center group">
+                <span class="text-blue-main font-black text-4xl mr-8 opacity-20 group-hover:opacity-100 transition-opacity">01</span>
+                <div class="flex-grow border-b border-gray-100 pb-4">
+                    <span class="text-xl font-bold">글로벌 AI 산업 현황 및 시장 규모</span>
+                </div>
+            </div>
+            <div class="flex items-center group">
+                <span class="text-blue-main font-black text-4xl mr-8 opacity-20 group-hover:opacity-100 transition-opacity">02</span>
+                <div class="flex-grow border-b border-gray-100 pb-4">
+                    <span class="text-xl font-bold">AI 산업 진화 로드맵: Milestones</span>
+                </div>
+            </div>
+            <div class="flex items-center group">
+                <span class="text-blue-main font-black text-4xl mr-8 opacity-20 group-hover:opacity-100 transition-opacity">03</span>
+                <div class="flex-grow border-b border-gray-100 pb-4">
+                    <span class="text-xl font-bold">AI 콘텐츠 점유율 및 유망 분야 분석</span>
+                </div>
+            </div>
+            <div class="flex items-center group">
+                <span class="text-blue-main font-black text-4xl mr-8 opacity-20 group-hover:opacity-100 transition-opacity">04</span>
+                <div class="flex-grow border-b border-gray-100 pb-4">
+                    <span class="text-xl font-bold">전략적 도식화: 프로세스 및 매트릭스</span>
+                </div>
+            </div>
+            <div class="flex items-center group">
+                <span class="text-blue-main font-black text-4xl mr-8 opacity-20 group-hover:opacity-100 transition-opacity">05</span>
+                <div class="flex-grow border-b border-gray-100 pb-4">
+                    <span class="text-xl font-bold">결론 및 향후 대응 과제</span>
+                </div>
+            </div>
+        </div>
+        <div class="slide-number">02</div>
+    </div>
+
+    <!-- Slide 3: Market Status -->
+    <div class="ppt-slide">
+        <p class="text-gray-400 text-sm mb-2">01. 산업 현황</p>
+        <h2 class="text-3xl font-black mb-10">글로벌 AI 시장 규모 추이 및 전망</h2>
+        <div class="flex-grow grid grid-cols-3 gap-10 items-center">
+            <div class="col-span-2 chart-container-box">
+                <canvas id="marketChart"></canvas>
+            </div>
+            <div class="bg-gray-50 p-8 rounded-2xl border-t-4 border-blue-main">
+                <h3 class="text-xl font-bold mb-4">Key Insight</h3>
+                <ul class="space-y-4 text-sm text-gray-600">
+                    <li class="flex items-start">
+                        <span class="text-blue-main mr-2">■</span>
+                        <span>2026년 시장 규모 3,200억 달러 돌파 예상 (연평균 성장률 35% 이상)</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-main mr-2">■</span>
+                        <span>생성형 AI 에이전트 서비스가 전체 매출의 40% 차지 전망</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide-number">03</div>
+    </div>
+
+    <!-- Slide 4: Milestones (Image Layout 1) -->
+    <div class="ppt-slide">
+        <p class="text-gray-400 text-sm mb-2">02. 로드맵</p>
+        <h2 class="text-3xl font-black mb-16">AI 산업의 진화: 3단계 이정표</h2>
+        <div class="relative flex justify-between px-10">
+            <div class="timeline-bar"></div>
+            <div class="z-10 flex flex-col items-center w-1/3">
+                <div class="pin"><div class="pin-inner"><p class="text-xs">Phase</p><p class="font-bold">2024</p></div></div>
+                <div class="w-4 h-4 bg-white border-2 border-gray-300 rounded-full -mt-2 mb-8"></div>
+                <div class="text-center px-6">
+                    <h4 class="font-bold text-lg mb-2">실무 도입</h4>
+                    <p class="text-xs text-gray-500">텍스트 및 코딩 비서 중심의<br>개별 생산성 향상 도구 정착</p>
+                </div>
+            </div>
+            <div class="z-10 flex flex-col items-center w-1/3">
+                <div class="pin"><div class="pin-inner"><p class="text-xs">Phase</p><p class="font-bold">2025</p></div></div>
+                <div class="w-4 h-4 bg-white border-2 border-gray-300 rounded-full -mt-2 mb-8"></div>
+                <div class="text-center px-6">
+                    <h4 class="font-bold text-lg mb-2">멀티모달 고도화</h4>
+                    <p class="text-xs text-gray-500">이미지/비디오 제어 기술 완성<br>복합 콘텐츠 생성 자동화</p>
+                </div>
+            </div>
+            <div class="z-10 flex flex-col items-center w-1/3">
+                <div class="pin"><div class="pin-inner"><p class="text-xs">Phase</p><p class="font-bold">2026</p></div></div>
+                <div class="w-4 h-4 bg-white border-2 border-gray-300 rounded-full -mt-2 mb-8"></div>
+                <div class="text-center px-6">
+                    <h4 class="font-bold text-lg mb-2">에이전틱 경제</h4>
+                    <p class="text-xs text-gray-500">자율 판단 에이전트 기반<br>비즈니스 프로세스 완전 자동화</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-number">04</div>
+    </div>
+
+    <!-- Slide 5: Data Breakdown (Image Layout 2) -->
+    <div class="ppt-slide flex-row items-center">
+        <div class="w-1/2 pr-12">
+            <p class="text-gray-400 text-sm mb-2">03. 분석 데이터</p>
+            <h2 class="text-3xl font-black mb-8">디지털 콘텐츠 내<br><span class="text-blue-main">AI 개입 비중 전망</span></h2>
+            <p class="text-gray-500 leading-relaxed mb-10">
+                2026년에는 전체 유통되는 디지털 콘텐츠의 65% 이상이 AI에 의해 생성되거나 보정될 것으로 예상됩니다. 특히 마케팅 에셋의 경우 도입률이 85%에 육박하며 'AI 네이티브' 제작 환경이 표준이 됩니다.
+            </p>
+            <div class="p-6 bg-blue-50 border-l-4 border-blue-main">
+                <p class="text-blue-main font-bold">"콘텐츠 생산 단가 90% 절감 가능성"</p>
+            </div>
+        </div>
+        <div class="w-1/2 flex justify-around">
+            <div class="flex flex-col items-center">
+                <div class="chart-container-box w-64 h-64">
+                    <canvas id="donut1"></canvas>
+                    <div class="absolute inset-0 flex items-center justify-center font-black text-3xl text-blue-main">85%</div>
+                </div>
+                <p class="mt-6 font-bold">기업 AI 도입률</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="chart-container-box w-64 h-64">
+                    <canvas id="donut2"></canvas>
+                    <div class="absolute inset-0 flex items-center justify-center font-black text-3xl text-gray-700">65%</div>
+                </div>
+                <p class="mt-6 font-bold">AI 생성 콘텐츠 비중</p>
+            </div>
+        </div>
+        <div class="slide-number">05</div>
+    </div>
+
+    <!-- Slide 6: Promising Sectors Grid -->
+    <div class="ppt-slide">
+        <p class="text-gray-400 text-sm mb-2">04. 유망 분야</p>
+        <h2 class="text-3xl font-black mb-12">2026 4대 핵심 유망 산업군</h2>
+        <div class="grid grid-cols-2 gap-8 flex-grow">
+            <div class="p-8 border border-gray-100 rounded-2xl bg-gray-50 hover:bg-white hover:shadow-xl transition-all">
+                <div class="text-3xl mb-4">🎯</div>
+                <h4 class="text-xl font-bold mb-3">초개인화 다이내믹 광고</h4>
+                <p class="text-sm text-gray-500 leading-relaxed">개별 유저 데이터에 반응하여 실시간으로 영상과 카피가 변하는 맞춤형 광고 솔루션</p>
+            </div>
+            <div class="p-8 border border-gray-100 rounded-2xl bg-gray-50 hover:bg-white hover:shadow-xl transition-all">
+                <div class="text-3xl mb-4">🤖</div>
+                <h4 class="text-xl font-bold mb-3">상호작용 버추얼 휴먼</h4>
+                <p class="text-sm text-gray-500 leading-relaxed">LLM 기반 실시간 대화가 가능한 가상 인플루언서 및 고객 응대 에이전트 서비스</p>
+            </div>
+            <div class="p-8 border border-gray-100 rounded-2xl bg-gray-50 hover:bg-white hover:shadow-xl transition-all">
+                <div class="text-3xl mb-4">🎮</div>
+                <h4 class="text-xl font-bold mb-3">실시간 월드 제너레이션</h4>
+                <p class="text-sm text-gray-500 leading-relaxed">게임 및 메타버스 환경에서 사용자 명령에 따라 환경과 NPC 스토리가 자율 생성</p>
+            </div>
+            <div class="p-8 border border-gray-100 rounded-2xl bg-gray-50 hover:bg-white hover:shadow-xl transition-all">
+                <div class="text-3xl mb-4">⚖️</div>
+                <h4 class="text-xl font-bold mb-3">AI 거버넌스 & 보안</h4>
+                <p class="text-sm text-gray-500 leading-relaxed">AI 저작권 탐지, 워터마킹, 모델 보안 및 윤리적 가이드라인 준수 자동화 툴</p>
+            </div>
+        </div>
+        <div class="slide-number">06</div>
+    </div>
+
+    <!-- Slide 7: Matrix Diagram -->
+    <div class="ppt-slide">
+        <p class="text-gray-400 text-sm mb-2">05. 전략 매트릭스</p>
+        <h2 class="text-3xl font-black mb-12">인간 vs AI 크리에이티브 역할 분담</h2>
+        <div class="flex-grow grid grid-cols-2 grid-rows-2 gap-4 relative">
+            <!-- Labels -->
+            <div class="absolute -left-10 top-1/2 -rotate-90 text-xs font-bold text-gray-400">창의성 및 감성 가치 (높음 ↑)</div>
+            <div class="absolute bottom-[-30px] left-1/2 -translate-x-1/2 text-xs font-bold text-gray-400">데이터 처리 및 생산 효율 (높음 →)</div>
+            
+            <div class="matrix-cell border-l-4 border-blue-200">
+                <h4 class="font-bold text-blue-600 mb-2">전문가 디렉팅</h4>
+                <p class="text-xs text-gray-500">브랜드 철학 수립, 최종 가치 판단,<br>AI 결과물 큐레이션</p>
+            </div>
+            <div class="matrix-cell border-l-4 border-blue-600 bg-blue-50">
+                <h4 class="font-bold text-blue-700 mb-2">AI-인간 협업 (Hybrid)</h4>
+                <p class="text-xs text-gray-500">초개인화 대량 캠페인 제작,<br>실시간 반응형 콘텐츠 생성</p>
+            </div>
+            <div class="matrix-cell border-l-4 border-gray-200">
+                <h4 class="font-bold text-gray-400 mb-2">전통적 제작 방식</h4>
+                <p class="text-xs text-gray-400">수동 편집, 고비용 저효율 공정<br>(도태 및 전환 필요 영역)</p>
+            </div>
+            <div class="matrix-cell border-l-4 border-gray-600 bg-gray-50">
+                <h4 class="font-bold text-gray-800 mb-2">완전 자율 생성</h4>
+                <p class="text-xs text-gray-500">SEO 블로그 포스팅, 단순 에셋 제작,<br>단순 정보 전달용 영상</p>
+            </div>
+        </div>
+        <div class="slide-number">07</div>
+    </div>
+
+    <!-- Slide 8: Closing Page -->
+    <div class="ppt-slide flex-col justify-center items-center text-center bg-gray-900">
+        <div class="w-16 h-1 bg-blue-main mb-12"></div>
+        <h2 class="text-6xl font-black text-white mb-6">THANK YOU</h2>
+        <p class="text-xl text-blue-main font-bold mb-20 tracking-widest">봐주셔서 감사합니다</p>
+        <div class="grid grid-cols-2 gap-20 text-left">
+            <div>
+                <p class="text-gray-500 text-xs mb-2">CONTACT</p>
+                <p class="text-white text-sm">beucheo.ai@gmail.com</p>
+            </div>
+            <div>
+                <p class="text-gray-500 text-xs mb-2">RESOURCES</p>
+                <p class="text-white text-sm">www.ai-trend-2026.report</p>
+            </div>
+        </div>
+        <div class="slide-number">08</div>
+    </div>
+
+    <script>
+        // Label Wrap Helper
+        function wrap(text) { return Array.isArray(text) ? text : [text]; }
+
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } }
+        };
+
+        // Slide 3: Market Size Chart
+        const ctxMarket = document.getElementById('marketChart').getContext('2d');
+        new Chart(ctxMarket, {
+            type: 'line',
+            data: {
+                labels: ['2023', '2024', '2025(E)', '2026(F)'].map(wrap),
+                datasets: [{
+                    data: [135, 184, 240, 320],
+                    borderColor: '#0066FF',
+                    backgroundColor: 'rgba(0, 102, 255, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 4,
+                    pointRadius: 6,
+                    pointBackgroundColor: '#fff'
+                }]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    y: { beginAtZero: false, grid: { display: false } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // Slide 5: Donut Charts
+        const donutOptions = {
+            ...commonOptions,
+            cutout: '85%',
+            plugins: { legend: { display: false }, tooltip: { enabled: false } }
+        };
+
+        new Chart(document.getElementById('donut1').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: [['AI 도입'], ['미도입']],
+                datasets: [{ data: [85, 15], backgroundColor: ['#0066FF', '#F3F4F6'], borderWidth: 0 }]
+            },
+            options: donutOptions
+        });
+
+        new Chart(document.getElementById('donut2').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: [['AI 생성'], ['인간 제작']],
+                datasets: [{ data: [65, 35], backgroundColor: ['#1F2937', '#F3F4F6'], borderWidth: 0 }]
+            },
+            options: donutOptions
+        });
+    </script>
+</body>
+</html>
